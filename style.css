@@ -104,3 +104,32 @@ body {
 /* Subtelny hover lift */
 .lift { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
 .lift:hover { transform: translateY(-6px); border-color: rgba(57,255,139,0.4); box-shadow: 0 20px 50px -20px rgba(57,255,139,0.35); }
+
+/* Marquee Animations for Partners */
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-marquee-left:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
