@@ -1,675 +1,454 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autołowca.pl — Przestań szukać. Zacznij zarabiać.</title>
-  <meta name="description" content="Bot, który łowi okazje cenowe z Otomoto i OLX i wysyła je prosto na Twój Telegram w kilka sekund. Dołącz do łowców." />
-  <link rel="icon" href="{DBD91B0F-8C04-452F-9C9A-703F9E4A65F3}.png" type="image/png" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="tailwind.config.js"></script>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="text-slate-200 antialiased font-body overflow-x-hidden">
-
-  <div id="preloader">
-    <div class="text-2xl sm:text-4xl loader-logo">
-      <span class="text-white">Auto</span><span class="text-gradient">łowca</span><span class="text-neon">.pl</span>
-    </div>
-    <p id="loaderText" class="mt-6 text-sm text-slate-400 font-mono">Inicjalizacja systemu...</p>
-    <div class="loader-bar mt-5"><span id="loaderFill"></span></div>
-    <p class="mt-4 text-xs text-slate-600 font-mono">v2.0 · Łowca okazji</p>
-  </div>
-
-  <header class="fixed top-0 inset-x-0 z-50">
-    <div class="mx-auto max-w-6xl px-4">
-      <nav class="mt-3 glass rounded-2xl px-4 py-3 flex items-center justify-between">
-        <a href="#" class="font-display font-extrabold text-lg tracking-tight">
-          <span class="text-white">Auto</span><span class="text-gradient">łowca</span><span class="text-neon">.pl</span>
-        </a>
-        <div class="hidden md:flex items-center gap-7 text-sm text-slate-300">
-          <a href="#funkcje" class="hover:text-neon transition">Funkcje</a>
-          <a href="#sukcesy" class="hover:text-neon transition">Sukcesy</a>
-          <a href="#historia" class="hover:text-neon transition">Roadmapa</a>
-          <a href="#cennik" class="hover:text-neon transition">Cennik</a>
-        </div>
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold rounded-xl px-4 py-2 bg-neon text-ink hover:brightness-110 transition">
-          Telegram →
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="relative grid-bg pt-36 pb-24 sm:pt-44 sm:pb-32 overflow-hidden">
-    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] bg-neon/10 rounded-full blur-[120px] animate-floaty pointer-events-none"></div>
-
-    <div class="relative mx-auto max-w-4xl px-4 text-center">
-      <div data-aos="fade-down" class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-slate-300 mb-8">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
-        </span>
-        Live · skanujemy Otomoto i OLX 24/7
-      </div>
-
-      <h1 data-aos="fade-up" class="font-display font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
-        Przestań szukać.<br />
-        <span class="text-gradient">Zacznij zarabiać.</span>
-      </h1>
-
-      <p data-aos="fade-up" data-aos-delay="100" class="mt-7 text-base sm:text-xl text-slate-400 max-w-2xl mx-auto">
-        Nasz bot poluje na auta wycenione poniżej rynku i wrzuca okazję prosto na Twój
-        telefon — zanim konkurencja zdąży odświeżyć stronę. Ty tylko dzwonisz i zgarniasz marżę.
-      </p>
-
-      <div data-aos="zoom-in" data-aos-delay="200" class="mt-10 flex flex-col items-center">
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="btn-glow inline-flex items-center gap-2 rounded-2xl bg-neon px-8 py-4 text-base sm:text-lg font-bold text-ink hover:brightness-110 transition">
-          ⚡ Wejdź na Telegram i odbierz dostęp
-        </a>
-        <p class="mt-4 text-xs sm:text-sm text-slate-500 max-w-md">
-          Płatność i aktywacja bota odbywa się bezpośrednio u administratora na Telegramie.
-        </p>
-      </div>
-
-      <div data-aos="fade-up" data-aos-delay="300" class="mt-16 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-        <div class="glass rounded-2xl py-5">
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-neon">&lt;15s</div>
-          <div class="text-[11px] sm:text-xs text-slate-400 mt-1">od ogłoszenia do alertu</div>
-        </div>
-        <div class="glass rounded-2xl py-5">
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-cyber">16</div>
-          <div class="text-[11px] sm:text-xs text-slate-400 mt-1">kanałów wojewódzkich</div>
-        </div>
-        <div class="glass rounded-2xl py-5">
-          <div class="text-2xl sm:text-3xl font-display font-extrabold text-neon">24/7</div>
-          <div class="text-[11px] sm:text-xs text-slate-400 mt-1">bot nigdy nie śpi</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ LIVE TICKER ============ -->
-  <div class="w-full bg-neon/10 border-y border-neon/30 py-3 overflow-hidden whitespace-nowrap flex text-sm font-mono tracking-widest text-neon relative z-10 shadow-[0_0_20px_rgba(57,255,139,0.2)]">
-    <marquee scrollamount="8" class="flex items-center">
-      🔥 OSTATNIE ZYSKI ŁOWCÓW: 
-      &nbsp;&nbsp;&nbsp;💰 +12 400 PLN (BMW G20) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +8 100 PLN (Audi A6) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +31 000 PLN (Porsche Macan) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +14 500 PLN (Mercedes C63) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +9 300 PLN (Skoda Superb) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +22 000 PLN (Range Rover) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💸 ŁĄCZNY ZYSK GRUPY W TYM MIESIĄCU: +1,240,500 PLN 💸
-      &nbsp;&nbsp;|&nbsp;&nbsp; 🔥 OSTATNIE ZYSKI ŁOWCÓW: 
-      &nbsp;&nbsp;&nbsp;💰 +12 400 PLN (BMW G20) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +8 100 PLN (Audi A6) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +31 000 PLN (Porsche Macan) 
-      &nbsp;&nbsp;|&nbsp;&nbsp; 💰 +14 500 PLN (Mercedes C63)
-    </marquee>
-  </div>
-
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl mt-6"></div>
-
-  <!-- ============ FUNKCJE ============ -->
-  <section id="funkcje" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">Przewaga technologiczna</p>
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Dlaczego <span class="text-gradient">Autołowca</span> dominuje?
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Zastosowaliśmy rozwiązania architektoniczne, które deklasują ogólnodostępne narzędzia na rynku.</p>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="glass p-8 rounded-3xl" data-aos="fade-up">
-          <div class="h-12 w-12 rounded-full bg-neon/10 flex items-center justify-center mb-6">
-            <svg class="h-6 w-6 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="font-bold text-white text-xl mb-3">Mikrosekundowe opóźnienia</h3>
-          <p class="text-sm text-slate-400">Wykorzystujemy prywatne klastry serwerowe i systemy kolejkowania, dzięki czemu alerty docierają do Ciebie natychmiast po publikacji.</p>
-        </div>
-
-        <div class="glass p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="100">
-          <div class="h-12 w-12 rounded-full bg-cyber/10 flex items-center justify-center mb-6">
-            <svg class="h-6 w-6 text-cyber" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-            </svg>
-          </div>
-          <h3 class="font-bold text-white text-xl mb-3">Zaawansowane filtry</h3>
-          <p class="text-sm text-slate-400">Algorytmy precyzyjnie selekcjonują oferty na podstawie odchylenia od średniej ceny rynkowej, ignorując fałszywe okazje i złom.</p>
-        </div>
-
-        <div class="glass p-8 rounded-3xl" data-aos="fade-up" data-aos-delay="200">
-          <div class="h-12 w-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-6">
-            <svg class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h3 class="font-bold text-white text-xl mb-3">Ekskluzywny dostęp</h3>
-          <p class="text-sm text-slate-400">Ograniczamy liczbę licencji, aby zapobiec kanibalizacji rynku. Chronimy zyski naszych partnerów biznesowych, zapewniając bezpieczną przewagę.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
-
-  <section id="sukcesy" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center mb-14" data-aos="fade-up">
-        <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">Dowód społeczny</p>
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Tak zarabiają <span class="text-gradient">nasi łowcy</span>
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Realne flipy z ostatnich tygodni. Bez ściemy, bez fotoszopa — tylko czysta marża.</p>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        <article class="glass lift rounded-3xl overflow-hidden" data-aos="fade-up">
-          <div class="relative h-44 bg-gradient-to-br from-slate-700/60 to-slate-900 flex items-center justify-center">
-            <span class="absolute top-3 left-3 text-[11px] bg-neon text-ink font-bold px-2.5 py-1 rounded-full">+37% ROI</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg">Golf VII 1.6 TDI</h3>
-            <div class="mt-4 space-y-2 text-sm">
-              <div class="flex justify-between"><span class="text-slate-400">Kupione za</span><span class="font-semibold">12 000 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Sprzedane za</span><span class="font-semibold text-neon">16 500 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Czas</span><span class="font-semibold">2 dni</span></div>
-            </div>
-            <div class="mt-5 pt-4 border-t border-white/10 flex justify-between items-center">
-              <span class="text-xs text-slate-500">Czysty zysk</span>
-              <span class="font-display font-extrabold text-xl text-gradient">+4 500 zł</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="glass lift rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-          <div class="relative h-44 bg-gradient-to-br from-slate-700/60 to-slate-900 flex items-center justify-center">
-            <span class="absolute top-3 left-3 text-[11px] bg-cyber text-ink font-bold px-2.5 py-1 rounded-full">+44% ROI</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg">Audi A4 B8 2.0 TFSI</h3>
-            <div class="mt-4 space-y-2 text-sm">
-              <div class="flex justify-between"><span class="text-slate-400">Kupione za</span><span class="font-semibold">18 000 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Sprzedane za</span><span class="font-semibold text-neon">26 000 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Czas</span><span class="font-semibold">5 dni</span></div>
-            </div>
-            <div class="mt-5 pt-4 border-t border-white/10 flex justify-between items-center">
-              <span class="text-xs text-slate-500">Czysty zysk</span>
-              <span class="font-display font-extrabold text-xl text-gradient">+8 000 zł</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="glass lift rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-          <div class="relative h-44 bg-gradient-to-br from-slate-700/60 to-slate-900 flex items-center justify-center">
-            <span class="absolute top-3 left-3 text-[11px] bg-neon text-ink font-bold px-2.5 py-1 rounded-full">+52% ROI</span>
-          </div>
-          <div class="p-6">
-            <h3 class="font-display font-bold text-lg">BMW E90 320d</h3>
-            <div class="mt-4 space-y-2 text-sm">
-              <div class="flex justify-between"><span class="text-slate-400">Kupione za</span><span class="font-semibold">9 500 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Sprzedane za</span><span class="font-semibold text-neon">14 500 PLN</span></div>
-              <div class="flex justify-between"><span class="text-slate-400">Czas</span><span class="font-semibold">1 dzień</span></div>
-            </div>
-            <div class="mt-5 pt-4 border-t border-white/10 flex justify-between items-center">
-              <span class="text-xs text-slate-500">Czysty zysk</span>
-              <span class="font-display font-extrabold text-xl text-gradient">+5 000 zł</span>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="mt-20">
-        <h3 class="text-center font-display font-bold text-2xl sm:text-3xl mb-10" data-aos="fade-up">
-          Co piszą na <span class="text-cyber">grupie</span>
-        </h3>
-
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-          <div class="glass rounded-2xl p-4" data-aos="fade-up">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="h-9 w-9 rounded-full bg-gradient-to-br from-cyber to-neon flex items-center justify-center text-ink font-bold text-sm">MK</div>
-              <div>
-                <p class="text-sm font-semibold">Mateusz K.</p>
-                <p class="text-[11px] text-slate-500">@flipmaster_pl</p>
-              </div>
-            </div>
-            <div class="bg-[#1b2a23] rounded-xl rounded-tl-none px-4 py-3 text-sm text-slate-100">
-              Bot odrobił się przy pierwszym aucie, polecam w ch*j! 🚀
-              <span class="block text-right text-[10px] text-slate-400 mt-1">21:37 ✓✓</span>
-            </div>
-          </div>
-
-          <div class="glass rounded-2xl p-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="h-9 w-9 rounded-full bg-gradient-to-br from-neon to-cyber flex items-center justify-center text-ink font-bold text-sm">PW</div>
-              <div>
-                <p class="text-sm font-semibold">Patryk W.</p>
-                <p class="text-[11px] text-slate-500">@handlarz_ślonsk</p>
-              </div>
-            </div>
-            <div class="bg-[#1b2a23] rounded-xl rounded-tl-none px-4 py-3 text-sm text-slate-100">
-              Złapałem Passata 8k pod rynkiem o 6 rano, reszta jeszcze spała 😂 mega
-              <span class="block text-right text-[10px] text-slate-400 mt-1">06:12 ✓✓</span>
-            </div>
-          </div>
-
-          <div class="glass rounded-2xl p-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="h-9 w-9 rounded-full bg-gradient-to-br from-cyber to-neon flex items-center justify-center text-ink font-bold text-sm">DG</div>
-              <div>
-                <p class="text-sm font-semibold">Damian G.</p>
-                <p class="text-[11px] text-slate-500">@damiancars</p>
-              </div>
-            </div>
-            <div class="bg-[#1b2a23] rounded-xl rounded-tl-none px-4 py-3 text-sm text-slate-100">
-              Myślałem że ściema, a tu pierwszy tydzień +11k na rękę. Subskrypcja to żart przy tym.
-              <span class="block text-right text-[10px] text-slate-400 mt-1">14:58 ✓✓</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
-
-  <!-- ============ VIP MASTERMIND ============ -->
-  <section id="vip" class="relative py-24 sm:py-28 bg-gradient-to-b from-transparent via-neon/5 to-transparent border-y border-neon/10">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="flex flex-col md:flex-row items-center gap-12">
-        <div class="flex-1" data-aos="fade-right">
-          <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">Społeczność Handlarzy</p>
-          <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-            Kanał <span class="text-gradient">Pochwal się zyskiem</span>
-          </h2>
-          <p class="mt-6 text-slate-400 text-lg leading-relaxed">
-            Na Telegramie mamy dedykowany kanał "Pochwal się zyskiem", na którym nasi łowcy dzielą się efektami z trasy.
-          </p>
-          <p class="mt-4 text-slate-400 text-lg leading-relaxed">
-            Na zdjęciu obok jeden z najmłodszych hustlerów na naszej grupie po kolejnym udanym flipie. Działamy konkretnie i pokazujemy realne wyniki.
-          </p>
-          
-          <div class="mt-10 grid grid-cols-2 gap-6">
-            <div class="glass p-5 rounded-2xl">
-              <div class="text-2xl font-display font-bold text-neon mb-1">90,000 PLN</div>
-              <div class="text-xs text-slate-500">Wygenerowanego zysku (2026)</div>
-            </div>
-            <div class="glass p-5 rounded-2xl">
-              <div class="text-2xl font-display font-bold text-cyber mb-1">18,500 PLN</div>
-              <div class="text-xs text-slate-500">Średni miesięczny zysk łowcy</div>
-            </div>
-          </div>
-        </div>
-        <div class="flex-1 relative mt-10 md:mt-0" data-aos="fade-left">
-          <div class="absolute inset-0 bg-neon/20 blur-[100px] rounded-full pointer-events-none"></div>
-          <div class="glass p-3 rounded-[2rem] relative z-10 transform rotate-2 hover:rotate-0 transition duration-500 overflow-hidden">
-            <img src="photo_2026-06-15_00-09-37.jpg" alt="Wynik z kanału" class="rounded-[1.5rem] w-full h-[550px] object-cover contrast-110" />
-            <div class="absolute bottom-6 left-6 right-6 glass backdrop-blur-md bg-black/60 p-4 rounded-xl border border-white/10 flex items-center gap-4">
-              <div class="h-12 w-12 rounded-full bg-neon flex shrink-0 items-center justify-center text-ink text-2xl font-bold">🔥</div>
-              <div>
-                <p class="font-bold text-white text-sm">Pochwal się zyskiem</p>
-                <p class="text-xs text-slate-400">Jeden z najmłodszych na grupie.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TECH PARTNERS (MARQUEE) ============ -->
-  <section class="py-20 border-y border-white/5 relative overflow-hidden bg-black/20">
-    <!-- Grid overlay -->
-    <div class="absolute inset-0 opacity-[0.02] pointer-events-none" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoŁowca - Bot do wyłapywania okazji motoryzacyjnych OLX/Otomoto</title>
+    <meta name="description" content="Wyłapuj najlepsze oferty samochodów szybciej niż handlarze. AutoŁowca to inteligentny bot Telegram powiadamiający o okazjach z portali motoryzacyjnych w ułamki sekund.">
+    <meta name="keywords" content="bot olx, bot otomoto, powiadomienia o samochodach, okazje motoryzacyjne, handel autami, powiadomienia telegram">
+    <meta property="og:title" content="AutoŁowca - Zostań łowcą motoryzacyjnych okazji">
+    <meta property="og:description" content="Nasz algorytm skanuje rynek 24/7 i wysyła Ci powiadomienia o autach poniżej ceny rynkowej prosto na Telegram.">
+    <meta property="og:type" content="website">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <div class="text-center mb-12 relative z-10">
-      <div class="flex items-center gap-4 justify-center mb-4">
-        <div class="h-px bg-slate-800 w-16"></div>
-        <span class="text-[10px] font-mono tracking-widest text-cyber uppercase">POWERED BY</span>
-        <div class="h-px bg-slate-800 w-16"></div>
-      </div>
-      <h2 class="text-2xl md:text-3xl font-display font-bold text-white">Partnerzy Technologiczni</h2>
-    </div>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Wygładzający Gradient Tła -->
+    <div class="bg-gradient"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
 
-    <div class="relative z-10 w-full overflow-hidden flex flex-col gap-12">
-      <!-- TOP ROW (Moves Left) -->
-      <div class="w-full relative overflow-hidden flex">
-        <div class="animate-marquee-left flex items-center gap-20 md:gap-32 px-10">
-          <!-- Duplicated Sets -->
-          <!-- Set 1 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">G</div><div class="text-[9px] font-mono tracking-widest uppercase">GOOGLE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">GITHUB</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">n.</div><div class="text-[9px] font-mono tracking-widest uppercase">NAZWA.PL</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">TELEGRAM</div></div>
-          <!-- Set 2 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">G</div><div class="text-[9px] font-mono tracking-widest uppercase">GOOGLE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">GITHUB</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">n.</div><div class="text-[9px] font-mono tracking-widest uppercase">NAZWA.PL</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">TELEGRAM</div></div>
-          <!-- Set 3 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">G</div><div class="text-[9px] font-mono tracking-widest uppercase">GOOGLE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">GITHUB</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">n.</div><div class="text-[9px] font-mono tracking-widest uppercase">NAZWA.PL</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">TELEGRAM</div></div>
-          <!-- Set 4 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">G</div><div class="text-[9px] font-mono tracking-widest uppercase">GOOGLE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">GITHUB</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">n.</div><div class="text-[9px] font-mono tracking-widest uppercase">NAZWA.PL</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><svg class="w-8 h-8 mb-2 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.94z"/></svg><div class="text-[9px] font-mono tracking-widest uppercase">TELEGRAM</div></div>
+    <!-- Nawigacja -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-car-burst"></i> AutoŁowca <span class="beta-badge">BETA 0.9</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Jak to działa</a></li>
+                <li><a href="#pricing">Cennik</a></li>
+                <li><a href="#slots">Status Miejsc</a></li>
+                <li><a href="#testimonials">Opinie</a></li>
+                <li><a href="#join">Jak dołączyć</a></li>
+            </ul>
+            <a href="#join" class="btn-primary-sm">Dołącz do łowów</a>
+            
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
-      </div>
-      
-      <!-- BOTTOM ROW (Moves Right) -->
-      <div class="w-full relative overflow-hidden flex">
-        <div class="animate-marquee-right flex items-center gap-20 md:gap-32 px-10" style="margin-left: -50%;">
-          <!-- Duplicated Sets -->
-          <!-- Set 1 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none border-2 border-current border-dashed rounded-full w-8 h-8 flex items-center justify-center"></div><div class="text-[9px] font-mono tracking-widest uppercase mt-1">OPENAI</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-4xl font-serif mb-2 leading-none">*</div><div class="text-[9px] font-mono tracking-widest uppercase">CLAUDE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">OM</div><div class="text-[9px] font-mono tracking-widest uppercase">OTOMOTO</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none text-cyber">O</div><div class="text-[9px] font-mono tracking-widest uppercase">OLX</div></div>
-          <!-- Set 2 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none border-2 border-current border-dashed rounded-full w-8 h-8 flex items-center justify-center"></div><div class="text-[9px] font-mono tracking-widest uppercase mt-1">OPENAI</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-4xl font-serif mb-2 leading-none">*</div><div class="text-[9px] font-mono tracking-widest uppercase">CLAUDE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">OM</div><div class="text-[9px] font-mono tracking-widest uppercase">OTOMOTO</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none text-cyber">O</div><div class="text-[9px] font-mono tracking-widest uppercase">OLX</div></div>
-          <!-- Set 3 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none border-2 border-current border-dashed rounded-full w-8 h-8 flex items-center justify-center"></div><div class="text-[9px] font-mono tracking-widest uppercase mt-1">OPENAI</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-4xl font-serif mb-2 leading-none">*</div><div class="text-[9px] font-mono tracking-widest uppercase">CLAUDE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">OM</div><div class="text-[9px] font-mono tracking-widest uppercase">OTOMOTO</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none text-cyber">O</div><div class="text-[9px] font-mono tracking-widest uppercase">OLX</div></div>
-          <!-- Set 4 -->
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none border-2 border-current border-dashed rounded-full w-8 h-8 flex items-center justify-center"></div><div class="text-[9px] font-mono tracking-widest uppercase mt-1">OPENAI</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-4xl font-serif mb-2 leading-none">*</div><div class="text-[9px] font-mono tracking-widest uppercase">CLAUDE</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none">OM</div><div class="text-[9px] font-mono tracking-widest uppercase">OTOMOTO</div></div>
-          <div class="flex flex-col items-center opacity-40 hover:opacity-100 transition cursor-pointer"><div class="text-3xl font-bold mb-2 leading-none text-cyber">O</div><div class="text-[9px] font-mono tracking-widest uppercase">OLX</div></div>
+    </nav>
+
+    <!-- Sekcja Hero -->
+    <header class="hero" id="home">
+        <div class="hero-content reveal">
+            <span class="badge">Sztuczna Inteligencja Motoryzacyjna | Wersja Beta 0.9</span>
+            <h1 class="hero-title">Wyłapuj samochody <br><span class="highlight">szybciej niż handlarze</span></h1>
+            <p class="hero-subtitle">Nasz autorski system analizuje rynek w czasie rzeczywistym. Znajdujemy perełki poniżej ceny rynkowej, omijamy "miny" i fałszywe oferty. Dostajesz okazję prosto na swojego Telegrama.</p>
+            <div class="hero-buttons">
+                <a href="#features" class="btn-primary">Poznaj Funkcje <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
-
-  <section id="proces" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-5xl px-4">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">3 kroki</p>
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Jak <span class="text-gradient">dołączyć?</span>
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Bez papierologii. Od kliknięcia do pierwszej okazji mija dosłownie kilka minut.</p>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="relative glass lift rounded-3xl p-7" data-aos="fade-up">
-          <div class="text-6xl font-display font-extrabold text-white/5 absolute top-3 right-5 select-none">01</div>
-          <div class="h-12 w-12 rounded-2xl bg-neon/15 border border-neon/30 flex items-center justify-center text-2xl mb-5">📲</div>
-          <h3 class="font-display font-bold text-lg">Wejdź na kanał</h3>
-          <p class="mt-2 text-sm text-slate-400">Klikasz w nasz główny kanał na Telegramie i widzisz, jak to wszystko działa od środka.</p>
+        <div class="hero-image reveal delay-1">
+            <div class="telegram-mockup">
+                <div class="tg-header">
+                    <div class="tg-back"><i class="fa-solid fa-chevron-left"></i></div>
+                    <div class="tg-title">
+                        <span class="tg-name">AutoŁowca Premium</span>
+                        <span class="tg-status">bot</span>
+                    </div>
+                    <div class="tg-avatar"><i class="fa-solid fa-robot"></i></div>
+                </div>
+                <div class="tg-body">
+                    <div class="tg-date">Dzisiaj</div>
+                    
+                    <div class="tg-message">
+                        <div class="tg-bubble">
+                            <strong>🚗 NOWA OKAZJA - MAZOWIECKIE</strong><br><br>
+                            <b>Marka:</b> Audi A4 B8<br>
+                            <b>Rok:</b> 2012<br>
+                            <b>Silnik:</b> 2.0 TDI<br><br>
+                            💰 <b>Cena: 24,900 PLN</b><br>
+                            📉 <i>Rynkowa: ~31,000 PLN (Taniej o 6k)</i><br><br>
+                            ⚠️ <b>Analiza AI:</b> Prywatny sprzedawca (nie komis). Tablice zgadzają się z rocznikiem.<br><br>
+                            <a href="#" class="tg-link">🔗 Link do OLX</a>
+                            <span class="tg-time">10:14</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tg-message delay-msg">
+                        <div class="tg-bubble">
+                            <strong>🚗 NOWA OKAZJA - MAZOWIECKIE</strong><br><br>
+                            <b>Marka:</b> BMW F30 320d<br>
+                            <b>Rok:</b> 2014<br><br>
+                            💰 <b>Cena: 41,500 PLN</b><br>
+                            📉 <i>Rynkowa: ~48,000 PLN</i><br><br>
+                            <a href="#" class="tg-link">🔗 Link do OTOMOTO</a>
+                            <span class="tg-time">10:16</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-input">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <span>Napisz wiadomość...</span>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <div class="relative glass lift rounded-3xl p-7" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-6xl font-display font-extrabold text-white/5 absolute top-3 right-5 select-none">02</div>
-          <div class="h-12 w-12 rounded-2xl bg-cyber/15 border border-cyber/30 flex items-center justify-center text-2xl mb-5">💸</div>
-          <h3 class="font-display font-bold text-lg">Pisz do admina</h3>
-          <p class="mt-2 text-sm text-slate-400">Piszesz do administratora i opłacasz subskrypcję. Cała aktywacja idzie bezpośrednio przez niego.</p>
+    <!-- Funkcje Bota -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <h2>Nie daj się wyprzedzić</h2>
+            <p>Zbudowaliśmy ekosystem, który zdejmuje z Ciebie ciężar poszukiwań.</p>
         </div>
-
-        <div class="relative glass lift rounded-3xl p-7" data-aos="fade-up" data-aos-delay="200">
-          <div class="text-6xl font-display font-extrabold text-white/5 absolute top-3 right-5 select-none">03</div>
-          <div class="h-12 w-12 rounded-2xl bg-neon/15 border border-neon/30 flex items-center justify-center text-2xl mb-5">🎯</div>
-          <h3 class="font-display font-bold text-lg">Łap okazje</h3>
-          <p class="mt-2 text-sm text-slate-400">Dostajesz dostęp do zamkniętych kanałów dla każdego województwa i od razu łapiesz okazje.</p>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Milisekundy decydują</h3>
+                <p>Od momentu publikacji ogłoszenia w sieci, nasz bot potrzebuje ułamków sekund, by je zanalizować i wysłać powiadomienie.</p>
+            </div>
+            <div class="feature-card reveal delay-1">
+                <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                <h3>Skaner Zdjec AI</h3>
+                <p>Zaawansowane algorytmy rozpoznawania obrazu odrzucają auta uszkodzone, pordzewiałe lub powypadkowe analizując ich zdjęcia.</p>
+            </div>
+            <div class="feature-card reveal delay-2">
+                <div class="icon-box"><i class="fa-solid fa-user-secret"></i></div>
+                <h3>Filtr Handlarzy</h3>
+                <p>Nienawidzisz fałszywych ofert? Bot wykrywa komisy, firmy oraz "Mirków Handlarzy" ukrytych pod pozorem sprzedaży prywatnej.</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="text-center mt-14" data-aos="zoom-in">
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="btn-glow inline-flex items-center gap-2 rounded-2xl bg-neon px-8 py-4 text-base sm:text-lg font-bold text-ink hover:brightness-110 transition">
-          ⚡ Odbierz dostęp na Telegramie
-        </a>
-      </div>
-    </div>
-  </section>
+    <!-- Jak Dołączyć (Płatność) -->
+    <section class="how-to-join" id="join">
+        <div class="section-header reveal">
+            <h2>Jak dołączyć do łowów?</h2>
+            <p>Proces jest bajecznie prosty, a cała obsługa oraz płatność odbywa się bezpiecznie przez aplikację Telegram.</p>
+        </div>
+        <div class="steps-container reveal">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Wejdź na Kanał Płatności</h3>
+                <p>Dołącz do darmowego kanału <b>Autołowca Płatności</b> na Telegramie, gdzie znajdziesz wszystkie szczegóły oraz informacje o wolnych miejscach.</p>
+            </div>
+            <div class="step-card delay-1">
+                <div class="step-number">2</div>
+                <h3>Wyślij Wzór</h3>
+                <p>Zgodnie z instrukcją na kanale, napisz prywatną wiadomość do Administratora (<b>@ssssiben</b>) podając krótki wzór: <i>Województwo, Okres (np. 1 miesiąc)</i>.</p>
+            </div>
+            <div class="step-card delay-2">
+                <div class="step-number">3</div>
+                <h3>Opłać i Zyskaj Dostęp</h3>
+                <p>Administrator przekaże Ci szczegóły płatności. Po wpłacie otrzymasz dostęp do zamkniętej grupy z okazjami. Bot automatycznie odliczy 30 dni subskrypcji.</p>
+            </div>
+        </div>
+        <div class="join-btn-container reveal delay-2">
+            <a href="https://t.me/autolowca" target="_blank" class="btn-primary" style="font-size: 1.3rem; padding: 20px 40px;"><i class="fa-brands fa-telegram"></i> Przejdź do Telegrama</a>
+        </div>
+    </section>
 
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
-
-  <section id="historia" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">Roadmap</p>
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Nasza <span class="text-gradient">historia</span>
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Zobacz, jaką drogę przeszliśmy od pierwszych linijek kodu po najpotężniejsze narzędzie na rynku.</p>
-      </div>
-
-      <div class="relative border-l border-white/10 ml-4 sm:ml-auto space-y-10 sm:space-y-12">
+    <!-- Cennik -->
+    <section class="pricing" id="pricing">
+        <div class="section-header reveal">
+            <h2>Wybierz swój plan</h2>
+            <p>Ekskluzywny dostęp. Ze względu na limit okazji, przyjmujemy <strong>tylko 15 osób na każde województwo</strong>.</p>
+        </div>
         
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-white/20"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Czerwiec 2025</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Powstanie Autołowcy</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Zdefiniowanie problemu opóźnień w dostępie do ogłoszeń rynkowych. Powstaje pierwsza, autorska architektura oprogramowania monitorującego największe portale w Polsce.</p>
+        <div class="pricing-toggle reveal">
+            <span class="toggle-label active" id="label-monthly">Miesięcznie</span>
+            <label class="switch">
+                <input type="checkbox" id="pricing-toggle-btn">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label" id="label-yearly">Rocznie <span class="badge-discount">-19%</span></span>
         </div>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="50">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-neon shadow-[0_0_12px_rgba(57,255,139,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Lipiec 2025</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Start kampanii marketingowej</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Oficjalne rozpoczęcie działań promocyjnych i udostępnienie usługi na szerszą skalę. Skuteczność algorytmów od razu przyciąga profesjonalistów z branży motoryzacyjnej.</p>
+        <div class="pricing-grid reveal delay-1">
+            <!-- Plan Podstawowy -->
+            <div class="pricing-card">
+                <h3>1 Województwo</h3>
+                <div class="price-box">
+                    <span class="currency">PLN</span>
+                    <span class="amount" id="price-main">499</span>
+                    <span class="period" id="period-main">/ msc</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fa-solid fa-check"></i> Natychmiastowe powiadomienia</li>
+                    <li><i class="fa-solid fa-check"></i> Wybrane 1 województwo</li>
+                    <li><i class="fa-solid fa-check"></i> Omijanie handlarzy</li>
+                    <li><i class="fa-solid fa-check"></i> Gwarancja braku przepełnienia (max 15 osób)</li>
+                </ul>
+                <a href="#join" class="btn-primary">Wybierz plan</a>
+            </div>
+
+            <!-- Plan Dodatkowy (Upsell) -->
+            <div class="pricing-card secondary-card">
+                <div class="card-badge">Opcja Dodatkowa</div>
+                <h3>Dodatkowe Woj.</h3>
+                <div class="price-box">
+                    <span class="currency">+ PLN</span>
+                    <span class="amount" id="price-extra">129</span>
+                    <span class="period" id="period-extra">/ msc</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fa-solid fa-plus"></i> Rozszerzenie strefy łowów</li>
+                    <li><i class="fa-solid fa-check"></i> Pełen dostęp dla kolejnego regionu</li>
+                    <li class="muted-text">Wymaga posiadania podstawowego pakietu</li>
+                </ul>
+                <a href="#join" class="btn-secondary">Rozszerz dostęp</a>
+            </div>
         </div>
+    </section>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="100">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-cyber shadow-[0_0_12px_rgba(34,211,238,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Październik 2025</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Rozbudowa infrastruktury</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Ze względu na dynamiczny wzrost zapytań, przeniesienie kluczowych procesów na dedykowane klastry serwerowe, zapewniające stabilność przy masowym obciążeniu.</p>
+    <!-- Status Miejsc (Sloty) -->
+    <section class="slots" id="slots">
+        <div class="section-header reveal">
+            <h2>Dostępność w regionach</h2>
+            <p>Sprawdź, ile miejsc zostało w Twoim województwie. Odświeżane na żywo z Telegrama (max 15 Łowców na region).</p>
         </div>
-
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="150">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-neon shadow-[0_0_12px_rgba(57,255,139,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Styczeń 2026</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Kamień milowy: 100 Użytkowników</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Społeczność inwestorów w zamkniętej grupie przekracza próg 100 osób. Autołowca staje się rynkowym standardem u wąskiego grona dystrybutorów.</p>
+        
+        <div class="slots-grid reveal" id="slots-grid">
+            <!-- Renderowane dynamicznie przez JS -->
         </div>
+    </section>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="200">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-cyber shadow-[0_0_12px_rgba(34,211,238,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Marzec 2026</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Maksymalizacja wyników ($$$$)</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Skalowanie operacji i generowanie rekordowych zysków z transakcji przez klientów. Oprogramowanie regularnie wyprzedza konkurencję rynkową.</p>
+    <!-- Opinie Użytkowników -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header reveal">
+            <h2>Co mówią użytkownicy?</h2>
+            <p>Wyniki mówią same za siebie. Zobacz opinie prawdziwych Łowców.</p>
         </div>
+        <div class="testimonials-grid reveal delay-1">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="user-avatar">M</div>
+                    <div class="user-info">
+                        <span class="user-name">Michał (Handlarz)</span>
+                        <span class="user-profits">+4,500 PLN zysku z jednego auta</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Bot spłacił mi się w pierwszym tygodniu działania. Kupiłem Audi A4 B8 wystawione o 3 rano. Zdążyłem zajechać z lawetą zanim ktokolwiek w ogóle otworzył oczy."</p>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="user-avatar">K</div>
+                    <div class="user-info">
+                        <span class="user-name">Kamil R.</span>
+                        <span class="user-profits">Dzięki temu omijam komisy</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Szukałem auta do prywaty od miesięcy. Filtry na handlarzy w tym bocie to złoto - w końcu kupiłem samochód od normalnej, prywatnej osoby. Powiadomienia wchodzą w ułamek sekundy na Telegrama."</p>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="250">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-orange-500 shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Wiosna 2026</div>
-          <h3 class="text-lg font-bold font-display text-orange-400 mb-2">Tymczasowe wstrzymanie dostępu</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl border-orange-500/20">W trosce o stabilność technologiczną oraz utrzymanie przewagi konkurencyjnej, dystrybucja licencji zostaje zawieszona. Trwają prace nad modernizacją kodu.</p>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="user-avatar">D</div>
+                    <div class="user-info">
+                        <span class="user-name">Dawid</span>
+                        <span class="user-profits">+7,200 PLN w miesiąc</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Na początku trochę wahałem się z rocznym pakietem, ale zwróciło się natychmiast. Na moim województwie jestem jednym z zaledwie kilku łowców. Zero konkurencji, czysty biznes."</p>
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            </div>
         </div>
+    </section>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="300">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-neon shadow-[0_0_12px_rgba(57,255,139,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Maj 2026</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Reaktywacja platformy</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Wznowienie dystrybucji na nowej, wysoce zoptymalizowanej architekturze. Sukces jest bezprecedensowy – ponad 40 nowych inwestorów dołącza w zaledwie jeden dzień.</p>
+    <!-- Partnerzy Technologiczni -->
+    <section class="partners" id="partners">
+        <div class="section-header reveal">
+            <h2>Nasi partnerzy technologiczni</h2>
+            <p>Korzystamy z najlepszych rozwiązań na rynku, aby dostarczać niezawodne usługi.</p>
         </div>
-
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="350">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-cyber shadow-[0_0_12px_rgba(34,211,238,0.8)]"></div>
-          <div class="text-xs font-mono text-slate-400 mb-1">Czerwiec 2026</div>
-          <h3 class="text-lg font-bold font-display text-white mb-2">Wdrożenie Autołowca 3.0</h3>
-          <p class="text-sm text-slate-400 glass p-4 rounded-2xl">Rewolucyjna aktualizacja z zaawansowanymi filtrami. Transformacja modelu cenowego z 59 zł na 299 zł miesięcznie, pozycjonująca oprogramowanie w prestiżowym segmencie B2B.</p>
+        
+        <div class="marquee-container reveal">
+            <div class="marquee-track">
+                <!-- Pierwsza tura -->
+                <div class="partner-item"><i class="fa-brands fa-github"></i><span>GITHUB</span></div>
+                <div class="partner-item"><i class="fa-solid fa-microchip"></i><span>OPENAI</span></div>
+                <div class="partner-item"><i class="fa-brands fa-google"></i><span>GOOGLE</span></div>
+                <div class="partner-item"><i class="fa-solid fa-tags"></i><span>OLX</span></div>
+                <div class="partner-item"><i class="fa-solid fa-car-side"></i><span>OTOMOTO</span></div>
+                <div class="partner-item"><i class="fa-solid fa-server"></i><span>NAZWA.PL</span></div>
+                <div class="partner-item"><i class="fa-brands fa-telegram"></i><span>TELEGRAM</span></div>
+                <div class="partner-item"><i class="fa-brands fa-python"></i><span>PYTHON</span></div>
+                <div class="partner-item"><i class="fa-brands fa-docker"></i><span>DOCKER</span></div>
+                
+                <!-- Druga tura (Zduplikowana) -->
+                <div class="partner-item"><i class="fa-brands fa-github"></i><span>GITHUB</span></div>
+                <div class="partner-item"><i class="fa-solid fa-microchip"></i><span>OPENAI</span></div>
+                <div class="partner-item"><i class="fa-brands fa-google"></i><span>GOOGLE</span></div>
+                <div class="partner-item"><i class="fa-solid fa-tags"></i><span>OLX</span></div>
+                <div class="partner-item"><i class="fa-solid fa-car-side"></i><span>OTOMOTO</span></div>
+                <div class="partner-item"><i class="fa-solid fa-server"></i><span>NAZWA.PL</span></div>
+                <div class="partner-item"><i class="fa-brands fa-telegram"></i><span>TELEGRAM</span></div>
+                <div class="partner-item"><i class="fa-brands fa-python"></i><span>PYTHON</span></div>
+                <div class="partner-item"><i class="fa-brands fa-docker"></i><span>DOCKER</span></div>
+            </div>
         </div>
+    </section>
 
-        <div class="relative pl-8 sm:pl-10" data-aos="fade-up" data-aos-delay="400">
-          <div class="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-white/20"></div>
-          <h3 class="text-lg font-bold font-display text-slate-400 mb-2">Kierunek ekspansji</h3>
-          <p class="text-sm text-slate-500 glass p-4 rounded-2xl border-dashed">Zdefiniowanie celów rozwoju: wejście na rynki zagraniczne oraz pełna integracja z rozwiązaniami sztucznej inteligencji.</p>
+    <!-- Najczęstsze Pytania (FAQ) -->
+    <section class="faq-section" id="faq">
+        <div class="section-header reveal">
+            <h2>Najczęstsze pytania (FAQ)</h2>
+            <p>Masz wątpliwości? Oto odpowiedzi na najczęstsze pytania naszych Łowców.</p>
         </div>
+        
+        <div class="accordion-container reveal">
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Czy potrzebuję specjalnej aplikacji?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Jedyną rzeczą, jakiej potrzebujesz, jest darmowy komunikator Telegram zainstalowany na Twoim telefonie lub komputerze.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Ile muszę mieć pieniędzy, żeby zacząć inwestować w auta?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Zalecamy budżet początkowy w wysokości co najmniej 5 000 - 10 000 PLN. Pamiętaj, że bot wyszukuje okazje w różnych przedziałach cenowych, od tanich aut miejskich po droższe limuzyny, więc im większy kapitał, tym więcej okazji możesz złowić.</p>
+                    </div>
+                </div>
+            </div>
 
-      </div>
-    </div>
-  </section>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Jak wygląda proces rezygnacji?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Nie wiążemy Cię żadną długoterminową umową. Dostęp kupujesz na 30 dni. Po tym czasie nasz bot po prostu usunie Cię z grupy na Telegramie, o ile sam nie zdecydujesz się odnowić dostępu u Administratora.</p>
+                    </div>
+                </div>
+            </div>
 
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Skąd pewność, że to nie są auta od "Mirków Handlarzy"?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Nasz autorski algorytm sztucznej inteligencji (Vision AI) przeczesuje ogłoszenia pod kątem powtarzających się numerów telefonów, charakterystycznych zdjęć "z placu" oraz ukrytych wzorców. Znacznie zmniejsza to ryzyko trafienia na ukryty komis.</p>
+                    </div>
+                </div>
+            </div>
 
-  <!-- ============ CENNIK ============ -->
-  <section id="cennik" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <p class="text-neon font-mono text-xs tracking-widest uppercase mb-3">Inwestycja</p>
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Model <span class="text-gradient">Cenowy</span>
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Prosta, transparentna wycena w modelu subskrypcyjnym dla profesjonalistów.</p>
-      </div>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Jak szybko pojawiają się powiadomienia?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Bot działa bez przerw 24/7. Od momentu pojawienia się ogłoszenia na portalu (OLX/Otomoto) do otrzymania powiadomienia na Telegramie mijają ułamki sekund. Będziesz w stanie zadzwonić, zanim inni handlarze w ogóle zobaczą tę ofertę.</p>
+                    </div>
+                </div>
+            </div>
 
-      <div class="max-w-lg mx-auto glass p-1 sm:p-1 rounded-[2rem] overflow-hidden" data-aos="fade-up">
-        <div class="bg-slate-900/50 rounded-[1.75rem] p-8 sm:p-10 border border-white/5 relative">
-          <div class="absolute top-0 right-0 px-4 py-1.5 bg-neon text-ink text-[10px] font-bold tracking-wider uppercase rounded-bl-xl rounded-tr-[1.75rem]">B2B Premium</div>
-          
-          <h3 class="text-2xl font-bold text-white mb-2">Licencja Autołowca</h3>
-          <p class="text-sm text-slate-400 mb-6">Pełen dostęp do architektury v3.0</p>
-          
-          <div class="flex items-baseline gap-2 mb-8 border-b border-white/10 pb-8">
-            <span class="text-5xl font-display font-extrabold text-white">299</span>
-            <span class="text-lg text-slate-400">PLN / msc</span>
-          </div>
-          
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start gap-3 text-sm text-slate-300">
-              <svg class="h-5 w-5 text-neon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              Monitoring województw (Otomoto, OLX)
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-300">
-              <svg class="h-5 w-5 text-neon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              Dostęp do prywatnego kanału Telegram
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-300">
-              <svg class="h-5 w-5 text-neon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              Alerty w czasie poniżej 15 sekund
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-300">
-              <svg class="h-5 w-5 text-neon shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              Gwarancja stałej ceny po zakupie
-            </li>
-          </ul>
-          
-          <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="block w-full text-center rounded-xl bg-white text-slate-900 font-bold py-4 hover:bg-slate-200 transition">
-            Zakup licencję u administratora
-          </a>
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Ile ogłoszeń pojawia się średnio w moim województwie?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Średnio na każde województwo pojawiają się około 4 okazje na godzinę. Oczywiście liczba ta różni się w zależności od pory dnia i wielkości regionu, ale w przeliczeniu na cały miesiąc, otrzymasz setki znakomitych szans na dobry interes!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Czy bot wyłapuje również uszkodzone auta?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Nie skupiamy się wyłącznie na autach w stanie idealnym. Nasz system wyłapuje pojazdy mocno zaniżone cenowo w danym przedziale rocznikowym – mogą to być "igły", jak i auta z usterkami blacharskimi, na których można świetnie zarobić po naprawie.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Czy mogę dokupić kolejne województwo w trakcie miesiąca?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Oczywiście! Jeśli zauważysz, że "przerabiasz" oferty zbyt szybko i chcesz zwiększyć zasięg swoich poszukiwań, wystarczy, że napiszesz do Administratora. Dostaniesz od nas natychmiastowy dostęp do kolejnego regionu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn">
+                    <span class="acc-title"><i class="fa-solid fa-circle-question"></i> Czy sobie poradzę, jeśli nigdy nie handlowałem autami?</span>
+                    <i class="fa-solid fa-chevron-down acc-icon"></i>
+                </button>
+                <div class="accordion-content">
+                    <div class="legal-text">
+                        <p>Zdecydowanie tak. AutoŁowca dostarcza Ci przed nos gotowe oferty z już wyliczoną różnicą do średniej ceny rynkowej. Twoim zadaniem jest jedynie zadzwonić do sprzedającego, dojechać jako pierwszy i kupić auto. Całą brudną i nudną robotę z odświeżaniem portali robimy za Ciebie.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
 
-  <!-- ============ FAQ ============ -->
-  <section id="faq" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">
-          Szybkie <span class="text-gradient">Q&A</span>
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">Masz wymówki, czy chcesz działać?</p>
-      </div>
-
-      <div class="grid gap-4 max-w-3xl mx-auto">
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up">
-          <h3 class="font-bold text-white mb-2 text-lg">Czemu to kosztuje aż 299 zł/msc?</h3>
-          <p class="text-sm text-slate-400">Bo odrabiasz to przy pierwszej lepszej okazji na flipie w 15 minut. Zależy mi na zamkniętej grupie konkretnych łowców, a nie tysiącach gapiów, którzy popsują rynek. Cena to filtr na ludzi bez kapitału.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fa-solid fa-car-burst"></i> AutoŁowca
+            </div>
+            <div style="text-align: center;">
+                <p>&copy; 2026 AutoŁowca. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-legal-links" style="margin-top: 10px; font-size: 0.85rem;">
+                    <a href="regulamin.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Regulamin</a> | 
+                    <a href="polityka.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Polityka Prywatności</a>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/autolowca.pl/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61591678768854" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://t.me/autolowca" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            </div>
         </div>
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="50">
-          <h3 class="font-bold text-white mb-2 text-lg">Skąd pewność, że to działa?</h3>
-          <p class="text-sm text-slate-400">Wrzucam regularnie screeny przelewów i zysków z aut na moje sociale. Oprogramowanie to ułamek tego, co wyciągam z rynku. Myślisz, że robiłbym to za darmo?</p>
-        </div>
-        <div class="glass p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="font-bold text-white mb-2 text-lg">Czy potrzebuję dużo kasy na start?</h3>
-          <p class="text-sm text-slate-400">Możesz flipować tańsze gruzy za 3k, możesz bawić się w segment premium za 50k. Bot wyłapuje wszystko. Ważne, żebyś potrafił szybko pojechać z gotówką po auto.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <div class="h-px glow-line opacity-40 mx-auto max-w-5xl"></div>
+    <script src="script.js"></script>
 
-  <section id="social" class="relative py-24 sm:py-28">
-    <div class="mx-auto max-w-5xl px-4 text-center">
-      <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight" data-aos="fade-up">
-        Zostaw <span class="text-gradient">follow</span>
-      </h2>
-      <p class="mt-4 text-slate-400 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-        Po więcej tipów handlarskich, kulis flipów i okazji na żywo. Pokażemy Ci, jak myśli prawdziwy łowca.
-      </p>
-
-      <div class="mt-12 grid gap-5 sm:grid-cols-3">
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="glass lift rounded-3xl p-8 group" data-aos="fade-up">
-          <div class="text-4xl mb-4">📲</div>
-          <h3 class="font-display font-bold text-lg group-hover:text-neon transition">Telegram</h3>
-          <p class="text-sm text-slate-400 mt-1">Kanał główny</p>
-          <span class="inline-block mt-4 text-sm font-semibold text-neon">Obserwuj →</span>
-        </a>
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="glass lift rounded-3xl p-8 group" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-4xl mb-4">💬</div>
-          <h3 class="font-display font-bold text-lg group-hover:text-neon transition">Kontakt</h3>
-          <p class="text-sm text-slate-400 mt-1">Napisz do admina</p>
-          <span class="inline-block mt-4 text-sm font-semibold text-neon">Wiadomość →</span>
-        </a>
-        <a href="#" class="glass lift rounded-3xl p-8 group" data-aos="fade-up" data-aos-delay="200">
-          <div class="text-4xl mb-4">👥</div>
-          <h3 class="font-display font-bold text-lg group-hover:text-neon transition">Facebook</h3>
-          <p class="text-sm text-slate-400 mt-1">Społeczność łowców</p>
-          <span class="inline-block mt-4 text-sm font-semibold text-neon">Obserwuj →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="relative py-20">
-    <div class="mx-auto max-w-4xl px-4">
-      <div class="relative glass rounded-3xl px-6 py-14 text-center overflow-hidden" data-aos="zoom-in">
-        <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 bg-neon/20 blur-[100px] rounded-full pointer-events-none"></div>
-        <h2 class="relative font-display font-extrabold text-3xl sm:text-4xl">Rynek nie czeka. <span class="text-gradient">Ty też nie powinieneś.</span></h2>
-        <p class="relative mt-4 text-slate-400 max-w-lg mx-auto">Każda minuta zwłoki to okazja, którą bierze ktoś inny. Wskakuj na pokład.</p>
-        <a href="https://t.me/autolowca" target="_blank" rel="noopener noreferrer" class="relative btn-glow inline-flex mt-8 items-center gap-2 rounded-2xl bg-neon px-8 py-4 text-lg font-bold text-ink hover:brightness-110 transition">
-          ⚡ Wejdź na Telegram
-        </a>
-        <p class="relative mt-4 text-xs text-slate-500">Płatność i aktywacja bota odbywa się bezpośrednio u administratora na Telegramie.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="border-t border-white/10 mt-10">
-    <div class="mx-auto max-w-6xl px-4 py-10">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <a href="#" class="font-display font-extrabold text-lg">
-          <span class="text-white">Auto</span><span class="text-gradient">łowca</span><span class="text-neon">.pl</span>
-        </a>
-        <div class="flex items-center gap-6 text-sm text-slate-400">
-          <a href="regulamin.html" class="hover:text-neon transition">Regulamin</a>
-          <a href="polityka.html" class="hover:text-neon transition">Polityka Prywatności</a>
-        </div>
-      </div>
-
-      <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
-        <p>Projekt Autołowca.pl | Wszelkie prawa zastrzeżone.</p>
-        <p class="sm:text-right">
-          Strona stworzona przez
-          <a href="https://www.facebook.com/profile.php?id=61578796583046" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-neon transition font-semibold">Twórcę</a>
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="script.js"></script>
+    <!-- Floating Telegram Button -->
+    <a href="https://t.me/autolowca" target="_blank" class="floating-tg-btn">
+        <i class="fa-brands fa-telegram"></i>
+        <span>Masz pytania? Pisz!</span>
+    </a>
 </body>
 </html>
