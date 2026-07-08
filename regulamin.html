@@ -1,91 +1,259 @@
 <!DOCTYPE html>
-<html lang="pl">
-<head>
+<html lang="pl" class="scroll-smooth">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regulamin - AutoŁowca</title>
+
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .standalone-legal {
-            max-width: 800px;
-            margin: 100px auto 50px;
-            background: var(--surface);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 50px;
-        }
-        .standalone-legal h1 {
-            font-family: var(--font-heading);
-            color: var(--primary);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .standalone-legal h2 {
-            font-family: var(--font-heading);
-            color: var(--text-main);
-            margin-top: 40px;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-        .standalone-legal p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            line-height: 1.8;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 30px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="bg-gradient"></div>
-    <div class="glow-orb orb-1"></div>
-
-    <div class="standalone-legal">
-        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Wróć na stronę główną</a>
-        
-        <h1>📜 REGULAMIN USŁUGI AUTOŁOWCA.PL</h1>
-
-        <h2>§ 1. Postanowienia ogólne</h2>
-        <p>Właścicielem serwisu Autołowca.pl oraz powiązanych z nim kanałów na komunikatorze Telegram jest [Twoje Imię i Nazwisko], świadczący usługi w ramach działalności nierejestrowanej (zgodnie z art. 5 ustawy Prawo przedsiębiorców), kontakt: autolowca@int.pl lub bezpośrednio przez komunikator Telegram: [@autolowca].</p>
-        <p>Usługa polega na udostępnieniu płatnego, czasowego dostępu do zamkniętej grupy/kanałów na komunikatorze Telegram, w których zautomatyzowany skrypt (Bot) publikuje linki do ogłoszeń motoryzacyjnych z zewnętrznych portali ogłoszeniowych.</p>
-        <p>Wykupienie dostępu i dołączenie do grupy oznacza pełną akceptację niniejszego Regulaminu.</p>
-
-        <h2>§ 2. Płatności i realizacja usługi</h2>
-        <p>Koszt dostępu do usługi zależy od wybranego pakietu (np. 499 PLN brutto za jedno województwo na 30 dni lub 4000 PLN brutto za wszystkie województwa na cały rok).</p>
-        <p>Płatność odbywa się z góry, bezpośrednio po kontakcie z Administratorem (przez przelew bankowy/kod QR z aplikacji Telegram).</p>
-        <p>Usługa ma charakter subskrypcji ręcznej. Nie podpinasz karty i system nie pobiera środków automatycznie. Aby przedłużyć dostęp na kolejny okres, Użytkownik musi samodzielnie dokonać kolejnej wpłaty.</p>
-        <p>Aktywacja dostępu następuje niezwłocznie po weryfikacji wpłaty przez Administratora (z reguły wysłanie zrzutu ekranu przyspiesza proces).</p>
-
-        <h2>§ 3. Prawa konsumenta i odstąpienie od umowy</h2>
-        <p>Zgodnie z art. 38 pkt 13 Ustawy o prawach konsumenta, Użytkownikowi nie przysługuje prawo do odstąpienia od umowy zawartej na odległość w terminie 14 dni.</p>
-        <p>Powodem braku możliwości zwrotu jest charakter usługi: jest to dostarczanie treści cyfrowych, które nie są zapisane na nośniku materialnym. Dokonując płatności i uzyskując natychmiastowy dostęp do grupy na Telegramie, Użytkownik wyraża zgodę na rozpoczęcie świadczenia usługi przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że traci tym samym prawo do odstąpienia od umowy.</p>
-
-        <h2>§ 4. Odpowiedzialność</h2>
-        <p>Bot Autołowca opiera swoje działanie na publicznie dostępnych danych z serwisów trzecich (np. OLX, Otomoto). Administrator nie odpowiada za treść tych ogłoszeń, ukryte wady pojazdów, błędy cenowe ani za uczciwość sprzedających.</p>
-        <p>Administrator nie gwarantuje, że każde przesłane przez bota ogłoszenie wygeneruje zysk dla Użytkownika. Wszelkie decyzje zakupowe Użytkownik podejmuje na własne ryzyko. Usługa ma charakter wyłącznie informacyjny.</p>
-        <p>Administrator zastrzega sobie prawo do chwilowych przerw w działaniu bota wynikających z prac konserwacyjnych lub zmian w strukturze zewnętrznych portali ogłoszeniowych.</p>
-
-        <h2>§ 5. Zasady korzystania z Grupy</h2>
-        <p>W kanałach Autołowca obowiązuje zakaz spamu, reklamowania własnych usług biznesowych oraz obrażania innych członków społeczności.</p>
-        <p>Surowo zabrania się kopiowania, udostępniania osobom trzecim oraz odsprzedawania linków i powiadomień generowanych przez bota.</p>
-        <p>Złamanie powyższych zasad skutkuje natychmiastowym i trwałym usunięciem Użytkownika z grupy (ban) bez prawa do zwrotu uiszczonej opłaty.</p>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+  </head>
+  <body class="bg-neutral-950 text-neutral-300 font-sans antialiased overflow-x-hidden selection:bg-blue-500/30 relative flex flex-col min-h-screen">
+    <!-- Ambient Background -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+      <div class="ambient-blob bg-blue-600 w-[40rem] h-[40rem] top-[-10rem] left-[-10rem]"></div>
+      <div class="ambient-blob bg-purple-600 w-[30rem] h-[30rem] top-[40%] right-[-5rem]"></div>
+      <div class="ambient-blob bg-indigo-600 w-[50rem] h-[50rem] bottom-[-20rem] left-[10%]"></div>
     </div>
-</body>
+
+    <!-- Navigation -->
+    <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full top-0 z-50 bg-neutral-950/70 backdrop-blur-md border-b border-neutral-800/50">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2 group">
+          <span class="text-xl font-medium text-white tracking-tighter">
+            AutoŁowca
+          </span>
+          <span class="text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded-full font-medium">
+            BETA 0.9
+          </span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+          <a href="index.html#jak-to-dziala" class="hover:text-white transition-colors">
+            Jak to działa
+          </a>
+          <a href="index.html#cennik" class="hover:text-white transition-colors">
+            Cennik
+          </a>
+          <a href="index.html#status" class="hover:text-white transition-colors">
+            Status Miejsc
+          </a>
+          <a href="index.html#opinie" class="hover:text-white transition-colors">
+            Opinie
+          </a>
+          <a href="index.html#dolacz" class="hover:text-white transition-colors">
+            Jak dołączyć
+          </a>
+        </div>
+
+        <!-- CTA Desktop -->
+        <div class="hidden md:flex">
+          <a href="index.html#dolacz" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-neutral-200 transition-colors">
+            Dołącz do łowów
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-neutral-400 hover:text-white">
+          <iconify-icon x-show="!mobileMenuOpen" icon="solar:hamburger-menu-linear" width="24" stroke-width="1.5"></iconify-icon>
+          <iconify-icon x-show="mobileMenuOpen" icon="solar:close-circle-linear" width="24" stroke-width="1.5" style="display: none;"></iconify-icon>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden absolute top-16 left-0 w-full bg-neutral-900 border-b border-neutral-800 p-6 flex flex-col gap-4 shadow-xl" style="display: none;">
+        <a @click="mobileMenuOpen = false" href="index.html#jak-to-dziala" class="text-sm font-medium text-neutral-300">
+          Jak to działa
+        </a>
+        <a @click="mobileMenuOpen = false" href="index.html#cennik" class="text-sm font-medium text-neutral-300">
+          Cennik
+        </a>
+        <a @click="mobileMenuOpen = false" href="index.html#status" class="text-sm font-medium text-neutral-300">
+          Status Miejsc
+        </a>
+        <a @click="mobileMenuOpen = false" href="index.html#opinie" class="text-sm font-medium text-neutral-300">
+          Opinie
+        </a>
+        <a @click="mobileMenuOpen = false" href="index.html#dolacz" class="text-sm font-medium text-neutral-300">
+          Jak dołączyć
+        </a>
+        <a @click="mobileMenuOpen = false" href="index.html#dolacz" class="bg-white text-black px-4 py-2 rounded-full text-sm font-medium text-center mt-2">
+          Dołącz do łowów
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-32 pb-20 px-6 max-w-4xl mx-auto w-full reveal">
+      <div class="mb-6">
+        <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
+          <iconify-icon icon="solar:arrow-left-linear"></iconify-icon>
+          Wróć na stronę główną
+        </a>
+      </div>
+
+      <div class="bg-neutral-900/50 border border-neutral-800 rounded-3xl p-8 md:p-12 backdrop-blur-md shadow-2xl">
+        <h1 class="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-8 flex items-center gap-3">
+          <iconify-icon icon="solar:document-text-linear" class="text-blue-400"></iconify-icon>
+          Regulamin usługi AutoŁowca
+        </h1>
+
+        <div class="space-y-6 text-neutral-400 leading-relaxed text-sm md:text-base">
+          <section>
+            <h2 class="text-lg font-medium text-white mb-2">§ 1. Postanowienia ogólne</h2>
+            <p>
+              Właścicielem serwisu Autołowca.pl oraz powiązanych z nim kanałów na komunikatorze Telegram jest [Twoje Imię i Nazwisko], świadczący usługi w ramach działalności nierejestrowanej (zgodnie z art. 5 ustawy Prawo przedsiębiorców), kontakt: autolowca@int.pl lub bezpośrednio przez komunikator Telegram: [@autolowca].
+            </p>
+            <p class="mt-2">
+              Usługa polega na udostępnieniu płatnego, czasowego dostępu do zamkniętej grupy/kanałów na komunikatorze Telegram, w których zautomatyzowany skrypt (Bot) publikuje linki do ogłoszeń motoryzacyjnych z zewnętrznych portali ogłoszeniowych.
+            </p>
+            <p class="mt-2">
+              Wykupienie dostępu i dołączenie do grupy oznacza pełną akceptację niniejszego Regulaminu.
+            </p>
+          </section>
+
+          <hr class="border-neutral-800">
+
+          <section>
+            <h2 class="text-lg font-medium text-white mb-2">§ 2. Płatności i realizacja usługi</h2>
+            <p>
+              Koszt dostępu do usługi zależy od wybranego pakietu (np. 499 PLN brutto za jedno województwo na 30 dni lub 4000 PLN brutto za wszystkie województwa na cały rok).
+            </p>
+            <p class="mt-2">
+              Płatność odbywa się z góry, bezpośrednio po kontakcie z Administratorem (przez przelew bankowy/kod QR z aplikacji Telegram).
+            </p>
+            <p class="mt-2">
+              Usługa ma charakter subskrypcji ręcznej. Nie podpinasz karty i system nie pobiera środków automatycznie. Aby przedłużyć dostęp na kolejny okres, Użytkownik musi samodzielnie dokonać kolejnej wpłaty.
+            </p>
+            <p class="mt-2">
+              Aktywacja dostępu następuje niezwłocznie po weryfikacji wpłaty przez Administratora (z reguły wysłanie zrzutu ekranu przyspiesza proces).
+            </p>
+          </section>
+
+          <hr class="border-neutral-800">
+
+          <section>
+            <h2 class="text-lg font-medium text-white mb-2">§ 3. Prawa konsumenta i odstąpienie od umowy</h2>
+            <p>
+              Zgodnie z art. 38 pkt 13 Ustawy o prawach konsumenta, Użytkownikowi nie przysługuje prawo do odstąpienia od umowy zawartej na odległość w terminie 14 dni.
+            </p>
+            <p class="mt-2">
+              Powodem braku możliwości zwrotu jest charakter usługi: jest to dostarczanie treści cyfrowych, które nie są zapisane na nośniku materialnym. Dokonując płatności i uzyskując natychmiastowy dostęp do grupy na Telegramie, Użytkownik wyraża zgodę na rozpoczęcie świadczenia usługi przed upływem terminu do odstąpienia od umowy i przyjmuje do wiadomości, że traci tym samym prawo do odstąpienia od umowy.
+            </p>
+          </section>
+
+          <hr class="border-neutral-800">
+
+          <section>
+            <h2 class="text-lg font-medium text-white mb-2">§ 4. Odpowiedzialność</h2>
+            <p>
+              Bot Autołowca opiera swoje działanie na publicznie dostępnych danych z serwisów trzecich (np. OLX, Otomoto). Administrator nie odpowiada za treść tych ogłoszeń, ukryte wady pojazdów, błędy cenowe ani za uczciwość sprzedających.
+            </p>
+            <p class="mt-2">
+              Administrator nie gwarantuje, że każde przesłane przez bota ogłoszenie wygeneruje zysk dla Użytkownika. Wszelkie decyzje zakupowe Użytkownik podejmuje na własne ryzyko. Usługa ma charakter wyłącznie informacyjny.
+            </p>
+            <p class="mt-2">
+              Administrator zastrzega sobie prawo do chwilowych przerw w działaniu bota wynikających z prac konserwacyjnych lub zmian w strukturze zewnętrznych portali ogłoszeniowych.
+            </p>
+          </section>
+
+          <hr class="border-neutral-800">
+
+          <section>
+            <h2 class="text-lg font-medium text-white mb-2">§ 5. Zasady korzystania z Grupy</h2>
+            <p>
+              W kanałach Autołowca obowiązuje zakaz spamu, reklamowania własnych usług biznesowych oraz obrażania innych członków społeczności.
+            </p>
+            <p class="mt-2">
+              Surowo zabrania się kopiowania, udostępniania osobom trzecim oraz odsprzedawania linków i powiadomień generowanych przez bota.
+            </p>
+            <p class="mt-2">
+              Złamanie powyższych zasad skutkuje natychmiastowym i trwałym usunięciem Użytkownika z grupy (ban) bez prawa do zwrotu uiszczonej opłaty.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-900 bg-neutral-950 pt-16 pb-8 mt-auto">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-1 md:col-span-2">
+          <a href="index.html" class="inline-block text-xl font-medium text-white tracking-tighter mb-4">
+            AutoŁowca
+          </a>
+          <p class="text-xs text-neutral-500 font-light max-w-sm mb-6">
+            Zaawansowane narzędzie AI dla profesjonalistów i entuzjastów
+            motoryzacji. Zdobądź przewagę na rynku samochodów używanych.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="https://t.me/autolowca" target="_blank" class="text-neutral-500 hover:text-white transition-colors">
+              <iconify-icon icon="solar:document-text-linear" width="20"></iconify-icon>
+            </a>
+            <a href="https://t.me/autolowca" target="_blank" class="text-neutral-500 hover:text-white transition-colors">
+              <iconify-icon icon="solar:letter-linear" width="20"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-medium text-white mb-4">Nawigacja</h4>
+          <ul class="space-y-2 text-xs text-neutral-400">
+            <li>
+              <a href="index.html#jak-to-dziala" class="hover:text-white transition-colors">
+                Jak to działa
+              </a>
+            </li>
+            <li>
+              <a href="index.html#cennik" class="hover:text-white transition-colors">
+                Cennik
+              </a>
+            </li>
+            <li>
+              <a href="index.html#status" class="hover:text-white transition-colors">
+                Status Miejsc
+              </a>
+            </li>
+            <li>
+              <a href="index.html#opinie" class="hover:text-white transition-colors">
+                Opinie
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-medium text-white mb-4">Legalne</h4>
+          <ul class="space-y-2 text-xs text-neutral-400">
+            <li>
+              <a href="regulamin.html" class="hover:text-white transition-colors">
+                Regulamin
+              </a>
+            </li>
+            <li>
+              <a href="polityka.html" class="hover:text-white transition-colors">
+                Polityka Prywatności
+              </a>
+            </li>
+            <li>
+              <a href="https://t.me/autolowca" target="_blank" class="hover:text-white transition-colors">Kontakt</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 border-t border-neutral-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-[10px] text-neutral-600">
+          © 2026 AutoŁowca. Wszelkie prawa zastrzeżone.
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>
